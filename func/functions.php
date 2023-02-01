@@ -37,8 +37,7 @@ function checkPassword($account,$password="") //return value: success: user, no 
 		if($db->rowCount()<1)
 			return -1;
 		$data = $db->fetchAll()[0];
-		$real_pass = $data["password"];
-		if(crypt($password,$real_pass) !== $real_pass)
+		if(!password_verify($password, $data['password']))
 			return -2;
 		return $data;
 	}catch(PDOException $e){

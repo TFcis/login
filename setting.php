@@ -24,7 +24,7 @@ if($uid===false){
 			}else {
 				try{
 					$db = PDO_prepare("UPDATE `table:account` SET `password`=:password WHERE `id`=:id");
-					$db->bindValue("password", crypt($_POST["password"]));
+					$db->bindValue("password", password_hash($_POST["password"], PASSWORD_DEFAULT));
 					$db->bindValue("id", $uid);
 					$db->execute();
 				}catch(PDOException $e){

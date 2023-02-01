@@ -43,7 +43,7 @@ if(isset($_POST["account"])){
 			try{
 				$db = PDO_prepare("INSERT INTO `table:account` (`account`, `password`, `email`, `nickname`, `realname`) VALUES (:account, :password, :email, :nickname, :realname)");
 				$db->bindValue("account", $_POST["account"]);
-				$db->bindValue("password", crypt($_POST["password"]));
+				$db->bindValue("password", password_hash($_POST["password"], PASSWORD_DEFAULT));
 				$db->bindValue("email", $_POST["email"]);
 				$db->bindValue("nickname", $_POST["nickname"]);
 				$db->bindValue("realname", $_POST["realname"]);
